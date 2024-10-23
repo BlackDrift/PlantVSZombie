@@ -19,14 +19,14 @@ public:
         sf::Vector2f position,
         Behaviour* plant_behaviour,
         int ammo_count);
-    ~Plant();
+    ~Plant() = default;
 
-    void setState(Context::State);
-    Context::State getState() const;
+    void setState(Context::State state);
+    Context::State getState() const { return this->mState; }
 
     sf::Color getColor() const;
-    sf::Vector2f getPosition() const;
-    int getAmmoCount() const;
+    sf::Vector2f getPosition() const { return this->mPosition; }
+    int getAmmoCount() const { return this->mAmmoCount; }
     void refillMagazine() ;
 
     bool shoot();
