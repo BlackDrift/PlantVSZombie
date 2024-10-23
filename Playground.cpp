@@ -41,12 +41,12 @@ void Playground::draw(sf::RenderWindow& window)
 			for (int j = 0; j < mPlants[i]->mProjectile.size(); j++)
 			{
 				std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
+				if (std::chrono::system_clock::now() >= t + std::chrono::seconds(1))
+				{
 					sf::CircleShape shape(5.f);
 					shape.setFillColor(sf::Color::White);
 					shape.setPosition(mPlants[i]->mProjectile[j]->getPosition());
 					window.draw(shape);
-				if (std::chrono::system_clock::now() >= t + std::chrono::seconds(1))
-				{
 				}
 			}
 		}
