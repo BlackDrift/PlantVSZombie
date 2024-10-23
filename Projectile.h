@@ -11,16 +11,11 @@ class Projectile
 {
     sf::Vector2f mPosition;
     std::string mName;
-    //int mAmmoCount, mMaxAmmo; 
-    Context::State mState;
-    Behaviour* mBehaviour;
     int mSpeed;
 public:
     Projectile();
     Projectile(
-        sf::Vector2f position,
-        Behaviour* projectile_behaviour/*,
-        int ammo_count*/);
+        sf::Vector2f position);
     ~Projectile();
 
     void setState(Context::State state);

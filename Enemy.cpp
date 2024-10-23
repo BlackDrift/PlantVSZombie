@@ -1,10 +1,8 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Vector2f position, Behaviour* enemy_behaviour /*, int ammo_count*/)
+Enemy::Enemy(sf::Vector2f position)
 {
     mPosition = position;
-    mBehaviour = enemy_behaviour;
-    mState = Context::State::idle;
     mSpeed = 1;
 }
 

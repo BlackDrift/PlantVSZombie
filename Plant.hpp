@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include "Context.hpp"
 #include "Behaviour.hpp"
+#include "Projectile.h"
 #include <iostream>
 
 class Plant
@@ -14,6 +15,7 @@ class Plant
     Context::State mState;
     Behaviour * mBehaviour;
 public:
+    std::vector<Projectile*> mProjectile;
     Plant();
     Plant(
         sf::Vector2f position,
