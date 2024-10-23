@@ -26,7 +26,6 @@ void Plant::refillMagazine()
 
 bool Plant::shoot()
 {
-
 	return true;
 }
 

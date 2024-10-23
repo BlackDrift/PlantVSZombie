@@ -1,27 +1,55 @@
 #include "Playground.h"
 
 
+namespace
+{
+static Playground* sInstance = nullptr;
+}
+
 Playground* Playground::instantiate()
 {
-	Behaviour plantBehaviour;
-
-	Playground* playground = new Playground();
-	Plant* Plant1 = new Plant(sf::Vector2f(10.f, 50.f), &plantBehaviour, 1);
-	Plant* Plant2 = new Plant(sf::Vector2f(10.f, 150.f), &plantBehaviour, 2);
-	Plant* Plant3 = new Plant(sf::Vector2f(10.f, 250.f), &plantBehaviour, 3);
-	Plant* Plant4 = new Plant(sf::Vector2f(10.f, 350.f), &plantBehaviour, 4);
-
-	playground->mPlants.push_back(Plant1);
-	playground->mPlants.push_back(Plant2);
-	playground->mPlants.push_back(Plant3);
-	playground->mPlants.push_back(Plant4);
-
-	return playground;
+	if (!sInstance)
+	{
+		sInstance = new Playground();
+		return sInstance;
+	}
+	return nullptr;
 }
+
+Playground::Playground()
+{
+	Behaviour* plantBehaviour = new Behaviour();
+
+
+	// action:;
+	// AddProjectileAction
+	// plantBehaviour->addaction(context::state::idle, new addprojectile.....)
+	// transition
+	// ptr = new transition
+	// ptr->addCondition(new enemyinlanecondition)
+	// ptr-settargetstate(state::shoot)
+	// -> Condition
+	// -> targetState
+	// bheaviour->addTransition
+	// bheaviour->addAction
+
+
+
+	Plant* Plant1 = new Plant(sf::Vector2f(10.f, 50.f), plantBehaviour, 1);
+	Plant* Plant2 = new Plant(sf::Vector2f(10.f, 150.f), plantBehaviour, 2);
+	Plant* Plant3 = new Plant(sf::Vector2f(10.f, 250.f), plantBehaviour, 3);
+	Plant* Plant4 = new Plant(sf::Vector2f(10.f, 350.f), plantBehaviour, 4);
+
+	mPlants.push_back(Plant1);
+	mPlants.push_back(Plant2);
+	mPlants.push_back(Plant3);
+	mPlants.push_back(Plant4);
+}
+
 
 Playground* Playground::getInstance()
 {
-	return nullptr;
+	return sInstance;
 }
 
 Playground::~Playground()
@@ -38,9 +66,9 @@ void Playground::draw(sf::RenderWindow& window)
 		window.draw(shape);
 		if (mPlants[i]->mProjectile.size() > 0 && mPlants[i]->shoot())
 		{
+			std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
 			for (int j = 0; j < mPlants[i]->mProjectile.size(); j++)
 			{
-				std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
 				if (std::chrono::system_clock::now() >= t + std::chrono::seconds(1))
 				{
 					sf::CircleShape shape(5.f);
@@ -66,23 +94,17 @@ void Playground::draw(sf::RenderWindow& window)
 
 void Playground::update()
 {
-	if (mEnemy.size() > 0)
+	for (int i = 0; i < mEnemy.size(); i++)
 	{
-		for (int i = 0; i < mEnemy.size(); i++)
-		{
-			mEnemy[i]->Update();
-		}
+		mEnemy[i]->Update();
 	}
 	for (int i = 0; i < mPlants.size(); i++)
 	{
-		if (mPlants[i]->mProjectile.size() > 0)
-		{
-			for (int j = 0; j < mPlants[i]->mProjectile.size(); j++)
-			{
-
-				mPlants[i]->mProjectile[j]->Update();
-			}
-		}
+		mPlants[i]->Update();
+	}
+	for (auto & p : mProjectiles)
+	{
+		p->Update();
 	}
 }
 
@@ -112,4 +134,9 @@ void Playground::handleUserInput(sf::Event& event, sf::RenderWindow& window)
 		Enemy* enemy = new Enemy(sf::Vector2f(mousePos.x, y));
 		mEnemy.push_back(enemy);
 	}
+}
+
+const std::vector<Enemy*>& Playground::getEnemies()
+{
+	return mEnemy;
 }

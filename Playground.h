@@ -10,6 +10,7 @@ class Playground
 private:
 	std::vector<Plant*> mPlants;
 	std::vector<Enemy*> mEnemy;
+	std::vector<Projectile*> mProjectiles;
 	Playground() = default;
 	/*void checkCollision(
 		std::vector<Projectile*>& mProjectiles,
@@ -22,4 +23,6 @@ public:
 	void update();
 	void handleUserInput(sf::Event& event, sf::RenderWindow&
 		window);
+
+	const std::vector<Enemy*>& getEnemies();
 };
