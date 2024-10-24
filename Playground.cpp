@@ -52,7 +52,7 @@ Playground::Playground()
 	Transition* ptr = new Transition;
 	ptr->addCondition(new Condition_EnemyInLane);
 	ptr->setTargetState(Context::State::shoot);
-	plantBehaviour->AddTransition(Context::State::shoot, ptr);
+	plantBehaviour->AddTransition(Context::State::idle, ptr);
 	plantBehaviour->AddAction(Context::State::shoot, new AddProjectileAction);
 
 	// action:;
@@ -98,20 +98,26 @@ void Playground::draw(sf::RenderWindow& window)
 		shape.setFillColor(sf::Color::Green);
 		shape.setPosition(mPlants[i]->getPosition());
 		window.draw(shape);
-		if (mPlants[i]->mProjectile.size() > 0 && mPlants[i]->shoot())
+		/*if (mPlants[i]->mProjectile.size() > 0 && mPlants[i]->shoot())
 		{
 			std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
 			for (int j = 0; j < mPlants[i]->mProjectile.size(); j++)
 			{
-				if (std::chrono::system_clock::now() >= t + std::chrono::seconds(1))
-				{
+
 					sf::CircleShape shape(5.f);
 					shape.setFillColor(sf::Color::White);
 					shape.setPosition(mPlants[i]->mProjectile[j]->getPosition());
 					window.draw(shape);
-				}
+
 			}
-		}
+		}*/
+	}
+	for (auto& pr : mProjectiles)
+	{
+		sf::CircleShape shape(5.f);
+		shape.setFillColor(sf::Color::White);
+		shape.setPosition(pr->getPosition());
+		window.draw(shape);
 	}
 	if (mEnemy.size() > 0)
 	{
@@ -140,6 +146,7 @@ void Playground::update()
 	{
 		p->Update();
 	}
+	checkCollision();
 }
 
 void Playground::handleUserInput(sf::Event& event, sf::RenderWindow& window)

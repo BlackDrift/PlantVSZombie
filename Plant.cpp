@@ -13,11 +13,17 @@ Plant::Plant(sf::Vector2f position, Behaviour* plant_behaviour, int ammo_count)
 	{
 		mProjectile.push_back(new Projectile(mPosition));
 	}
+	//mBehaviour->Start(this);
 }
 
 void Plant::setState(Context::State state)
 {
 	mState = state;
+}
+
+void Plant::dimAmmoCount()
+{
+	mAmmoCount--;
 }
 
 void Plant::refillMagazine()
@@ -35,7 +41,9 @@ bool Plant::shoot()
 
 void Plant::Update()
 {
+	mBehaviour->Start(this);
 	mBehaviour->Update(this);
+	mBehaviour->End(this);
 }
 
 

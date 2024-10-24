@@ -29,6 +29,7 @@ public:
     sf::Color getColor() const;
     sf::Vector2f getPosition() const { return this->mPosition; }
     int getAmmoCount() const { return this->mAmmoCount; }
+    void dimAmmoCount();
     void refillMagazine() ;
 
     bool shoot();

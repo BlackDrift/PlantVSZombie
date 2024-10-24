@@ -15,6 +15,7 @@ void AddProjectileAction::Start(Plant* plant)
 	if (plant->getAmmoCount() > 0)
 	{
 		playground->AddProjectile(plant->getPosition());
+		plant->dimAmmoCount();
 	}
 }
 

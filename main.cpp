@@ -5,9 +5,11 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(650, 400), "GamingCampus - PVZ - IA/StateMachines");
     window.setFramerateLimit(60);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
     Playground* oPlayground = Playground::instantiate();
+    if(!oPlayground)
+    {
+        return -1;
+    }
     while (window.isOpen())
     {
         sf::Event event;

@@ -133,6 +133,7 @@
     <ClCompile Include="..\addProjectileAction.cpp" />
     <ClCompile Include="..\Behaviour.cpp" />
     <ClCompile Include="..\Condition_EnemyInLane.cpp" />
+    <ClCompile Include="..\Condition_shooting.cpp" />
     <ClCompile Include="..\DoNothing.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\main.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="..\Behaviour.hpp" />
     <ClInclude Include="..\Condition.hpp" />
     <ClInclude Include="..\Condition_EnemyInLane.h" />
+    <ClInclude Include="..\Condition_shooting.h" />
     <ClInclude Include="..\Context.hpp" />
     <ClInclude Include="..\DoNothing.h" />
     <ClInclude Include="..\Enemy.h" />
