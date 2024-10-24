@@ -11,6 +11,8 @@ private:
 	std::vector<Plant*> mPlants;
 	std::vector<Enemy*> mEnemy;
 	std::vector<Projectile*> mProjectiles;
+	sf::Font mFont;
+	int mScore;
 	Playground();
 	void checkCollision();
 public:

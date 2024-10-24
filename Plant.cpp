@@ -2,18 +2,14 @@
 #include "Behaviour.hpp"
 
 
-Plant::Plant(sf::Vector2f position, Behaviour* plant_behaviour, int ammo_count)
+Plant::Plant(sf::Vector2f position, Behaviour* plant_behaviour, int ammo_count, int hp)
 {
 	mPosition = position;
 	mBehaviour = plant_behaviour;
 	mAmmoCount = ammo_count;
 	mMaxAmmo = ammo_count;
 	setState(Context::State::idle);
-	for (int i = 0; i < mMaxAmmo; i++)
-	{
-		mProjectile.push_back(new Projectile(mPosition));
-	}
-	//mBehaviour->Start(this);
+	mHp = hp;
 }
 
 void Plant::setState(Context::State state)
@@ -28,22 +24,27 @@ void Plant::dimAmmoCount()
 
 void Plant::refillMagazine()
 {
+	mAmmoCount = mMaxAmmo;
 }
 
-bool Plant::shoot()
+void Plant::dimHp()
 {
-	//if (m)
-	//{
-
-	//}
-	return true;
+	mHp--;
 }
+
+
 
 void Plant::Update()
 {
-	mBehaviour->Start(this);
+
+	if (mState != mLastState)
+	{
+		mBehaviour->End(this);  
+		mBehaviour->Start(this); 
+		mLastState = mState; 
+	}
+
 	mBehaviour->Update(this);
-	mBehaviour->End(this);
 }
 
 

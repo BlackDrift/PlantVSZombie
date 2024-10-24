@@ -2,15 +2,15 @@
 #include "Action.hpp"
 #include <chrono>
 
-class AddProjectileAction: public Action
+class ReloadAction : public Action
 {
 public:
-	AddProjectileAction();
-	~AddProjectileAction();
+    ReloadAction();
+    ~ReloadAction();
     void Start(Plant* Plant) override;
     void Update(Plant* Plant) override;
     void End(Plant* Plant) override;
 private:
-    std::chrono::time_point<std::chrono::steady_clock>  mLastShotTime;
+    std::chrono::time_point<std::chrono::steady_clock>  mStartTime;
 };
 

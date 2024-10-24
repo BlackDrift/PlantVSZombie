@@ -20,6 +20,7 @@ void Transition::Try(Plant * Plant)
     }
     if (true_tests != 0 && true_tests == mConditions.size())
     {
+        std::cout << "Plant transitioning to state: " << static_cast<int>(mTargetState) << std::endl;
         Plant->setState(mTargetState);
     }
 }

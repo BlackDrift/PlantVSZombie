@@ -14,13 +14,16 @@ class Plant
     int mAmmoCount, mMaxAmmo;
     Context::State mState;
     Behaviour * mBehaviour;
+    Context::State mLastState;
+    int mHp;
 public:
     std::vector<Projectile*> mProjectile;
     Plant();
     Plant(
         sf::Vector2f position,
         Behaviour* plant_behaviour,
-        int ammo_count);
+        int ammo_count,
+        int hp);
     ~Plant() = default;
 
     void setState(Context::State state);
@@ -31,6 +34,8 @@ public:
     int getAmmoCount() const { return this->mAmmoCount; }
     void dimAmmoCount();
     void refillMagazine() ;
+    int getHp() { return this->mHp; };
+    void dimHp();
 
     bool shoot();
 

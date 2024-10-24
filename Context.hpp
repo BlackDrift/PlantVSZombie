@@ -5,6 +5,7 @@ namespace Context
 enum class State 
 {
     idle,
-    shoot
+    shoot,
+    reload
 };
 };
