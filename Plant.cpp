@@ -26,11 +26,16 @@ void Plant::refillMagazine()
 
 bool Plant::shoot()
 {
+	//if (m)
+	//{
+
+	//}
 	return true;
 }
 
 void Plant::Update()
 {
+	mBehaviour->Update(this);
 }
 
 

@@ -11,10 +11,8 @@ private:
 	std::vector<Plant*> mPlants;
 	std::vector<Enemy*> mEnemy;
 	std::vector<Projectile*> mProjectiles;
-	Playground() = default;
-	/*void checkCollision(
-		std::vector<Projectile*>& mProjectiles,
-		std::vector<Enemy*>& mEnemies);*/
+	Playground();
+	void checkCollision();
 public:
 	static Playground* instantiate();
 	static Playground* getInstance();
@@ -23,6 +21,7 @@ public:
 	void update();
 	void handleUserInput(sf::Event& event, sf::RenderWindow&
 		window);
+	void AddProjectile(sf::Vector2f position);
 
 	const std::vector<Enemy*>& getEnemies();
 };

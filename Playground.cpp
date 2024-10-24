@@ -1,9 +1,37 @@
 #include "Playground.h"
-
+#include "addProjectileAction.h"
+#include "Transition.hpp"
+#include "DoNothing.h"
+#include "Condition_EnemyInLane.h"
 
 namespace
 {
 static Playground* sInstance = nullptr;
+}
+
+void Playground::checkCollision()
+{
+	int countProjectile = 0;
+	for (auto& p : mProjectiles)
+	{
+		int countEnemy = 0;
+		for (auto& e : mEnemy)
+		{
+			if (p->getPosition().y == e->getPosition().y)
+			{
+				if (p->getPosition().x + 5.f >= e->getPosition().x - 10.f && p->getPosition().x + 5.f <= e->getPosition().x + 10)
+				{
+					mProjectiles.erase(mProjectiles.begin() + countProjectile);
+					countProjectile--;
+					mEnemy.erase(mEnemy.begin() + countEnemy);
+					countEnemy--;
+				}
+			}
+			countEnemy++;
+
+		}
+		countProjectile++;
+	}
 }
 
 Playground* Playground::instantiate()
@@ -20,6 +48,12 @@ Playground::Playground()
 {
 	Behaviour* plantBehaviour = new Behaviour();
 
+	plantBehaviour->AddAction(Context::State::idle, new DoNothing);
+	Transition* ptr = new Transition;
+	ptr->addCondition(new Condition_EnemyInLane);
+	ptr->setTargetState(Context::State::shoot);
+	plantBehaviour->AddTransition(Context::State::shoot, ptr);
+	plantBehaviour->AddAction(Context::State::shoot, new AddProjectileAction);
 
 	// action:;
 	// AddProjectileAction
@@ -134,6 +168,11 @@ void Playground::handleUserInput(sf::Event& event, sf::RenderWindow& window)
 		Enemy* enemy = new Enemy(sf::Vector2f(mousePos.x, y));
 		mEnemy.push_back(enemy);
 	}
+}
+
+void Playground::AddProjectile(sf::Vector2f position)
+{
+	mProjectiles.push_back(new Projectile(position));
 }
 
 const std::vector<Enemy*>& Playground::getEnemies()

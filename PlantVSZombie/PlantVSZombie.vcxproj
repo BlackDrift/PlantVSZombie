@@ -130,7 +130,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\addProjectileAction.cpp" />
     <ClCompile Include="..\Behaviour.cpp" />
+    <ClCompile Include="..\Condition_EnemyInLane.cpp" />
+    <ClCompile Include="..\DoNothing.cpp" />
     <ClCompile Include="..\Enemy.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\Plant.cpp" />
@@ -140,9 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Action.hpp" />
+    <ClInclude Include="..\addProjectileAction.h" />
     <ClInclude Include="..\Behaviour.hpp" />
     <ClInclude Include="..\Condition.hpp" />
+    <ClInclude Include="..\Condition_EnemyInLane.h" />
     <ClInclude Include="..\Context.hpp" />
+    <ClInclude Include="..\DoNothing.h" />
     <ClInclude Include="..\Enemy.h" />
     <ClInclude Include="..\Plant.hpp" />
     <ClInclude Include="..\Playground.h" />
